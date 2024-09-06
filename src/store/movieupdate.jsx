@@ -8,10 +8,18 @@ export const movie = {
     getmoviehomepage: createAsyncThunk(`${moduleName}/${AppName}/newupdate`, async (param, thunkAPI) => {
         try {
             const responsive = await connect.film.getlistfilm(param)
-            
+
             return responsive.data
         } catch (error) {
             thunkAPI.dispatch({ variant: "error", message: "Lỗi lấy dữ liệu" })
+            return thunkAPI.rejectWithValue(error)
+        }
+    }),
+    getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (param, thunkAPI) => {
+        try {
+            const responsive = await connect.updatefilm.filmnewupdate(param)
+            return responsive.data
+        } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
     })
@@ -41,6 +49,25 @@ const MovieSlice = createSlice({
                 state.movies = payload
             })
             .addCase(movie.getmoviehomepage.rejected, (state, { error }) => {
+                state.loading = false
+                state.movies = {
+                    data: []
+                }
+                state.error = error
+            })
+            .addCase(movie.getAnime.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.movies = {
+                    data: []
+                }
+            })
+            .addCase(movie.getAnime.fulfilled, (state, { payload }) => {
+                state.loading = false
+                state.error = false
+                state.movies = payload
+            })
+            .addCase(movie.getAnime.rejected, (state, { error }) => {
                 state.loading = false
                 state.movies = {
                     data: []

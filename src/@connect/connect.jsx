@@ -7,7 +7,7 @@ export default {
     },
     // Lấy phim theo thể loại  https://phimapi.com/v1/api/danh-sach/phim-le
     updatefilm: {
-        filmnewupdate: (param) => axios.get(`${process.env.REACT_APP_HOSTNAME}`)
+        filmnewupdate: (params) => axios.get(`${process.env.REACT_APP_HOSTNAME}/v1/api/danh-sach/${params.slug}`)
     },
     // Thông tin Phim & Danh sách tập phim  https://phimapi.com/phim/khi-anh-chay-ve-phia-em
     filmepisode: {
