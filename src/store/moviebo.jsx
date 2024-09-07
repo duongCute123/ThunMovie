@@ -7,7 +7,7 @@ const AppName = "ThunMovie"
 export const moviebo = {
     getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (param, thunkAPI) => {
         try {
-            const responsive = await connect.updatefilm.filmnewupdate(param)
+            const responsive = await connect.updatefilm.filmnotpagelimit(param)
             return responsive.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -17,7 +17,7 @@ export const moviebo = {
 const BoSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: true,
+        loading: null,
         error: null,
         movies: []
     },
@@ -39,7 +39,7 @@ const BoSlice = createSlice({
                 state.movies = payload
             })
             .addCase(moviebo.getAnime.rejected, (state, { error }) => {
-                state.loading = false
+                state.loading = null
                 state.movies = {
                     data: []
                 }

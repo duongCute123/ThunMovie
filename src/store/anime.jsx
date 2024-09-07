@@ -7,6 +7,14 @@ const AppName = "ThunMovie"
 export const anime = {
     getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (param, thunkAPI) => {
         try {
+            const responsive = await connect.updatefilm.filmnotpagelimit(param)
+            return responsive.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }),
+    getMoviePageLimit: createAsyncThunk(`${AppName}/${moduleName}/pagelimit`, async (param, thunkAPI) => {
+        try {
             const responsive = await connect.updatefilm.filmnewupdate(param)
             return responsive.data
         } catch (error) {
@@ -17,7 +25,7 @@ export const anime = {
 const AnimeSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: true,
+        loading: null,
         error: null,
         movies: []
     },
@@ -35,11 +43,30 @@ const AnimeSlice = createSlice({
             })
             .addCase(anime.getAnime.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.error = false
+                state.error = null
                 state.movies = payload
             })
             .addCase(anime.getAnime.rejected, (state, { error }) => {
+                state.loading = null
+                state.movies = {
+                    data: []
+                }
+                state.error = error
+            })
+            .addCase(anime.getMoviePageLimit.pending, (state) => {
+                state.loading = true
+                state.error = null
+                state.movies = {
+                    data: []
+                }
+            })
+            .addCase(anime.getMoviePageLimit.fulfilled, (state, { payload }) => {
                 state.loading = false
+                state.error = null
+                state.movies = payload
+            })
+            .addCase(anime.getMoviePageLimit.rejected, (state, { error }) => {
+                state.loading = null
                 state.movies = {
                     data: []
                 }

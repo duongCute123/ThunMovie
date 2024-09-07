@@ -4,7 +4,7 @@ import Home from "./main/component/home/home";
 
 const App = () => {
   return (
-    <div className="bg-black/95">
+    <div className="  bg-black/95 min-h-screen">
       <Routeer />
     </div>
   );

@@ -7,7 +7,7 @@ const AppName = "ThunMovie"
 export const moviele = {
     getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (param, thunkAPI) => {
         try {
-            const responsive = await connect.updatefilm.filmnewupdate(param)
+            const responsive = await connect.updatefilm.filmnotpagelimit(param)
             return responsive.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -17,7 +17,7 @@ export const moviele = {
 const LeSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: true,
+        loading: null,
         error: null,
         movies: []
     },

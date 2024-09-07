@@ -27,7 +27,7 @@ export const movie = {
 const MovieSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: true,
+        loading: null,
         error: null,
         movies: []
     },
@@ -45,11 +45,11 @@ const MovieSlice = createSlice({
             })
             .addCase(movie.getmoviehomepage.fulfilled, (state, { payload }) => {
                 state.loading = false
-                state.error = false
+                state.error = null
                 state.movies = payload
             })
             .addCase(movie.getmoviehomepage.rejected, (state, { error }) => {
-                state.loading = false
+                state.loading = null
                 state.movies = {
                     data: []
                 }

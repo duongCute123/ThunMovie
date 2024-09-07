@@ -1,14 +1,18 @@
-export const TheLoai=[
+export const TheLoai = [
     {
-        name : "Phim Lẻ",
+        name: "Phim Lẻ",
         fullname: "phim-le"
     },
     {
-        name : "Phim Bộ",
-        fullnamen :"phim-bo"
+        name: "Phim Bộ",
+        fullname: "phim-bo"
     },
     {
-        name : "Phim hoạt hình",
-        fullname :"phim-hoat-hinh"
+        name: "Phim hoạt hình",
+        fullname: "hoat-hinh"
+    },
+    {
+        name: "TV Shows",
+        fullname: "tv-shows"
     }
 ]

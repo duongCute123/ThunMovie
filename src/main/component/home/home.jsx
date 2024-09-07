@@ -30,11 +30,6 @@ const Home = () => {
     return (
         <div>
             <div className="home relative">
-                <div className="">
-                    <div className="header z-40">
-                        <Menu />
-                    </div>
-                </div>
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -74,7 +69,7 @@ const Home = () => {
                                                 </ul>
                                                 <button className="text-white hover:bg-yellow-400 h-14 w-40 rounded-full border-2 border-yellow-400 flex items-center my-5"> <CiPlay1 className="mx-2" size={30} /> Xem Ngay</button>
                                             </div>
-                                            <div className="bg-stone-900 overflow-hidden animate-none hidden aspect-[2/3] w-full max-w-[320px] rounded-lg border-[14px] border-primary md:block">
+                                            <div className="bg-stone-900 overflow-hidden animate-none hidden aspect-[2/3] w-full max-w-[320px] rounded-lg border-[14px] border-yellow-400 md:block">
                                                 <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} alt="" className="w-full object-cover bg-cover duration-300 bg-no-repeat" width={300} height={450} />
                                             </div>
                                         </div>
