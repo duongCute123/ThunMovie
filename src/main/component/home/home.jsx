@@ -13,10 +13,11 @@ import AnimeSlide from "../anime/anime";
 import { IoIosTime } from "react-icons/io";
 import { FaRegClosedCaptioning } from "react-icons/fa6";
 import { FcOvertime } from "react-icons/fc";
+import { CiPlay1 } from "react-icons/ci";
 import MoviLeSlide from "../anime/phimle";
 import MoviboSlide from "../anime/phimbo";
-import { CiPlay1 } from "react-icons/ci";
 import { anime } from "../../../store/anime";
+import { Link } from "react-router-dom";
 const Home = () => {
     const phim = useSelector(state => state.categorymovie)
     const [slug, setSlug] = useState("hoat-hinh")
@@ -67,7 +68,7 @@ const Home = () => {
                                                     </ul>
 
                                                 </ul>
-                                                <button className="text-white hover:bg-yellow-400 h-14 w-40 rounded-full border-2 border-yellow-400 flex items-center my-5"> <CiPlay1 className="mx-2" size={30} /> Xem Ngay</button>
+                                                <Link to={`/detail-movie/${movie.slug}`} className="text-white hover:bg-yellow-400 h-14 w-40 rounded-full border-2 border-yellow-400 flex items-center my-5"> <CiPlay1 className="mx-2" size={30} /> Xem Ngay</Link>
                                             </div>
                                             <div className="bg-stone-900 overflow-hidden animate-none hidden aspect-[2/3] w-full max-w-[320px] rounded-lg border-[14px] border-yellow-400 md:block">
                                                 <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} alt="" className="w-full object-cover bg-cover duration-300 bg-no-repeat" width={300} height={450} />

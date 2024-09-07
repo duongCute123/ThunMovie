@@ -89,11 +89,17 @@ const Menu = () => {
                 </ul>
                 <div className={`inset-y-0 lg:hidden fixed bg-zinc-900 w-8/12 overflow-y-auto overflow-x-hidden max-h-screen translate-x-0 pl-4 z-20 bottom-0 duration-500 ${open ? 'right-0' : 'right-[-100%]'}`}>
                     <nav className="mx-5 my-20 gap-10 text-lg grid font-semibold z-50">
-                        <ul>
+                        <ul onClick={toggleMenu}>
                             <li className="flex items-center border-b-2 my-2 border-white/10 gap-2">
                                 <TiHomeOutline />
-                                <Link>Trang chủ</Link>
+                                <Link to={"/"}>Trang chủ</Link>
                             </li>
+                            {TheLoai.map((theloai, ID) => (
+                                <li key={ID} className="flex items-center border-b-2 my-4 border-white/10 gap-2">
+                                    <RiMovie2Fill />
+                                    <Link to={`/phim/${theloai.fullname}`}>{theloai.name}</Link>
+                                </li>
+                            ))}
                             <li className="flex items-center border-b-2 my-4 border-white/10 gap-2">
                                 <RiMovie2Fill />
                                 <Link>Thể loại</Link>

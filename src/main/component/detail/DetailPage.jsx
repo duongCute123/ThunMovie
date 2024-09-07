@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { episode } from "../../../store/filmepisode";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-
+import { IoIosTime } from "react-icons/io";
+import { FaRegClosedCaptioning } from "react-icons/fa6";
+import { FcOvertime } from "react-icons/fc";
+import { IoEarthSharp } from "react-icons/io5";
+import { RiMovie2Fill } from "react-icons/ri";
+import { IoMdShare } from "react-icons/io";
+import { GiSelfLove } from "react-icons/gi";
+import ModalSocials from "../modal/modalmedial";
 const DetailPage = () => {
     const { slug } = useParams()
     const detais = useSelector(state => state.taps)
@@ -23,43 +30,60 @@ const DetailPage = () => {
     const changeServer = () => {
         setServer(!server)
     }
+    const [showModal, setShowModal] = useState(false)
+    const HandlerCloseModal = () => {
+        setShowModal(false)
+    }
     return (
         <div>
             <div className="bg-cover w-full aspect-video relative bg-center lg:max-h-[800px]" style={
                 { backgroundImage: `url(${detais?.movie?.movie?.thumb_url})` }
             }>
-                <div className="bg-black/90 inset-0 flex absolute">
-                    <div className="flex items-center">
-                        <div className="aspect-[2/3] w-full hidden lg:block max-w-[320px]">
-                            <img src={detais?.movie?.movie?.poster_url} alt="" />
+                <div className="inset-0 bg-black/90 px-4 pb-10 pt-24 flex items-center lg:absolute">
+                    <div className="w-full max-w-7xl mx-auto flex flex-col items-center gap-8 md:flex-row">
+                        <div className="bg-stone-900 overflow-hidden animate-none aspect-[2/3] rounded w-full max-w-[300px]">
+                            <img src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
                         </div>
-                        <div className="">
-                            <h2>{detais?.movie?.movie?.name}</h2>
-                            <li>{detais?.movie?.movie?.origin_name}</li>
-                            <li>{detais?.movie?.movie?.episode_current}</li>
-                            <li>{detais?.movie?.movie?.quality}</li>
-                            <ul>
-                                {
-                                    detais?.movie?.movie?.category.map((category) => (
-                                        <li key={category.slug}>{category.name}</li>
-                                    ))
-                                }
+                        <div className="w-full gap-4">
+                            <h2 className="text-4xl lg:text-5xl font-extrabold text-white">{detais?.movie?.movie?.name}</h2>
+                            <a className="text-yellow-500">{detais?.movie?.movie?.origin_name}</a>
+                            <div className="flex flex-row text-white gap-4 mt-8 items-center">
+                                <li className="w-28 bg-white p-0.5 border text-black text-center">Tập {detais?.movie?.movie?.episode_current.replace("Tập ", "")}/{detais?.movie?.movie?.episode_total}</li>
+                                <li className="border-2 border-white p-0.5">{detais?.movie?.movie?.quality}</li>
+                                <ul className="flex gap-4">
+                                    {
+                                        detais?.movie?.movie?.category.map((category) => (
+                                            <li key={category.slug}>{category.name}</li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                            <ul className="flex text-white items-center gap-4 mt-4">
+                                <li className="flex items-center"> <IoIosTime color="yellow" />{detais?.movie?.movie?.year}</li>
+                                <li className="flex items-center"> <FcOvertime color="yellow" />{detais?.movie?.movie?.time}</li>
+                                <li className="flex items-center"><FaRegClosedCaptioning color="yellow" />{detais?.movie?.movie?.lang}</li>
                             </ul>
-                            <ul>
-                                <li>{detais?.movie?.movie?.year}</li>
-                                <li>{detais?.movie?.movie?.time}</li>
-                                <li>{detais?.movie?.movie?.lang}</li>
-                            </ul>
-                            <ul>
-                                <li>{detais?.movie?.movie?.episode_current}/{detais?.movie?.movie?.episode_total}</li>
+                            <ul className="flex gap-4 text-white mt-4">
+                                <li className="flex items-center gap-2"><RiMovie2Fill color="yellow" />{detais?.movie?.movie?.episode_current}/{detais?.movie?.movie?.episode_total}</li>
                                 <li>
                                     {
                                         detais?.movie?.movie?.country.map((country) => (
-                                            <li key={country.id}>{country.name}</li>
+                                            <li key={country.id} className="flex gap-2 items-center"><IoEarthSharp color="yellow" />{country.name}</li>
                                         ))
                                     }
                                 </li>
                             </ul>
+                            <p className="text-white mt-4">
+                                {detais?.movie?.movie?.content}
+                            </p>
+                            <div className="mt-8 flex gap-8 items-center rounded-full border-2 p-1 lg:w-[400px] h-16">
+                                <button className="text-white hover:text-yellow-500 text-center border-r-2 w-20 flex flex-col items-center" onClick={() => { setShowModal(true) }} ><IoMdShare color="white" />Share</button>
+                                <ModalSocials visible={showModal} closed={HandlerCloseModal} />
+                                <div className="flex text-white gap-8 items-center">
+                                    <li className="rounded-full bg-slate-600 w-28 mx-auto flex justify-center h-10 text-center items-center font-bold">Trailer</li>
+                                    <li className="rounded-full border-2 border-yellow-500 hover:bg-yellow-500 hover:text-black w-28 mx-auto flex gap-2 justify-center h-10 text-center items-center font-bold"> <GiSelfLove />Yêu thích</li>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
