@@ -7,21 +7,22 @@ import ReactPlayer from "react-player";
 const DetailPage = () => {
     const { slug } = useParams()
     const detais = useSelector(state => state.taps)
-    console.log(detais?.movie?.episodes)
     const dispatch = useDispatch()
     const [current, setcurrent] = useState()
+    const [server, setServer] = useState(false)
     useEffect(() => {
         if (detais?.movie?.episodes && detais.movie.episodes.length > 0) {
             const tap1 = detais.movie.episodes[0].server_data[0]
             setcurrent(tap1)
         }
     }, [detais])
-    console.log(current);
 
     useEffect(() => {
         dispatch(episode.episodemovie({ slug: slug }))
     }, [dispatch])
-
+    const changeServer = () => {
+        setServer(!server)
+    }
     return (
         <div>
             <div className="bg-cover w-full aspect-video relative bg-center lg:max-h-[800px]" style={
@@ -65,7 +66,7 @@ const DetailPage = () => {
                 </div>
 
             </div>
-            <h1 className="text-white">Hello</h1>
+            <h1 className="text-white text-3xl font-bold mt-8 mb-3 mx-5">Danh sách tập</h1>
             <div className="text-white  mx-10">
                 {
                     detais?.movie?.episodes && (detais?.movie?.episodes.map((data) => (
@@ -81,17 +82,40 @@ const DetailPage = () => {
                     )))
                 }
             </div>
+            <div className="mt-10 mb-5">
+                <div className="flex text-white mx-0 justify-center gap-4">
+                    <button className={`w-28 rounded-xl ${server ? '' : 'bg-blue-600'} hover:bg-blue-600 bg-black p-2 hover:text-white`} onClick={changeServer}>Server 1</button>
+                    <button className={`w-28 rounded-xl ${server ? 'bg-blue-600' : ''}  hover:bg-blue-600 bg-black p-2 hover:text-white`} onClick={changeServer}>Server 2</button>
+                </div>
+                <p className="text-red-700 text-center">Vui lòng đổi server nếu không xem được</p>
+            </div>
             {
                 current && (
-                    <ReactPlayer
-                        controls={true}
-                        url={current.link_embed}
-                        playing={true}
-                        volume={1}
-                        width="100%"
-                        height="100%"
-                        pip={true}
-                    />
+                    <div className="mx-8 lg:mx-14 items-center justify-center text-center">
+                        {
+                            server ?
+                                <ReactPlayer
+                                    controls={true}
+                                    url={current.link_m3u8}
+                                    playing={true}
+                                    volume={1}
+                                    width="100%"
+                                    height="100%"
+                                    pip={true}
+                                />
+                                :
+                                <>
+                                    <iframe
+                                        src={current.link_embed}
+                                        className="w-11/12 items-center justify-center mx-auto"
+                                        height="450"
+                                        title={current.name}
+                                        frameBorder="0"
+                                        allowFullScreen
+                                    ></iframe>
+                                </>
+                        }
+                    </div>
                 )
             }
         </div>
