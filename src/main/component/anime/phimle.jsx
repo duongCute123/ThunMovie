@@ -26,7 +26,7 @@ const MoviLeSlide = () => {
                     <></>
                     :
                     <div className="mx-4">
-                        <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim hoat hinh</h1>
+                        <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim lẻ</h1>
                         <Swiper
                             spaceBetween={20}
                             modules={[Pagination]}
@@ -42,7 +42,7 @@ const MoviLeSlide = () => {
                                     slidesPerView: 2,
                                 },
                                 768: {
-                                    slidesPerView: 2,
+                                    slidesPerView: 3,
                                 },
                                 1024: {
                                     slidesPerView: 4,
