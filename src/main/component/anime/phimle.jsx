@@ -55,7 +55,12 @@ const MoviLeSlide = () => {
                                         <div className='bg-black/95'>
                                             <div className='w-full h-auto relative aspect-[2/3]'>
                                                 <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} loading='lazy' className='w-full rounded-md h-full duration-300 ' width={300} height={450} alt="" />
+                                                <div className={`absolute inset-0 bg-black/60 none flex-col items-center justify-center gap-4 text-sm font-bold opacity-0 hover:opacity-100 duration-300 text-center hidden md:flex`}>
+                                                    <Link to={""} className='rounded-full w-36 px-6 py-2.5 translate-y-3 hover:translate-y-0 duration-300 bg-yellow-500 text-black'>Yêu thích</Link>
+                                                    <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg- border-yellow-500 w-36 px-6 py-2.5 bg-black/70 translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-black'>Chi tiết</Link>
+                                                </div>
                                             </div>
+                                            <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
                                             <span className='absolute top-3 left-4 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>
                                             <div className='flex justify-between my-2'>
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
@@ -73,8 +78,8 @@ const MoviLeSlide = () => {
                                 ))
                             }
                         </Swiper>
-                        <h1 className='mx-auto my-6 justify-center text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[200px]  font-bold text-lg
-         h-[30px] border border-y-amber-300'>Xem tất cả</h1>
+                        <Link to={`/phim/${slug}`} className='mx-auto my-6 justify-center flex text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[150px]  font-bold text-lg
+             h-[50px] border border-y-amber-300'>Xem tất cả</Link>
                     </div>
             }
         </div>

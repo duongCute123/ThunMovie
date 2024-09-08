@@ -13,14 +13,15 @@ const Movies = () => {
         dispatch(anime.getMoviePageLimit({ slug: fullname, page: page, limit: 24 }))
     }, [dispatch, fullname, page])
     const toTalPage = timkiem?.movies?.data?.params?.pagination?.totalPages
-
-    const [pageRanges, setpageRanges] = useState()
     const handlePageChange = (selectedPage) => {
         setPage(selectedPage.selected + 1);
         window.scrollTo({
             top: 0
         })
     };
+    useEffect(() => {
+        window.screenTop = 0
+    }, [])
     return (
         <>
 
@@ -29,7 +30,7 @@ const Movies = () => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
                     {
                         timkiem?.movies?.data?.items && timkiem?.movies?.data?.items.map(
-                            (movie,idx) => (
+                            (movie, idx) => (
                                 <div className="relative" key={idx}>
                                     <div className="aspect-[2/3]">
                                         <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} loading="lazy" width={320} height={450} className="w-full rounded-lg h-full object-cover bg-no-repeat" alt="" />
