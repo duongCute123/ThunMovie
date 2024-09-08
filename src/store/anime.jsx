@@ -25,7 +25,7 @@ export const anime = {
 const AnimeSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: null,
+        loading: false,
         error: null,
         movies: []
     },

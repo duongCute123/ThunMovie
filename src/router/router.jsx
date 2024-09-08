@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Menu from "../menu/menu"
 import Home from "../main/component/home/home"
-// import Anime from "../main/component/anime/anime"
-import AnimeSlide from "../main/component/anime/anime"
-import MoviLeSlide from "../main/component/anime/phimle"
-import MoviboSlide from "../main/component/anime/phimbo"
 import SearchMovie from "../main/component/search/searchmovie"
 import DetailPage from "../main/component/detail/DetailPage"
 import Movies from "../main/component/anime/movie"
+import Footer from "../main/component/footer/footer."
+import MovieNewUpDate from "../main/component/anime/movieupdate"
 
 const Routeer = () => {
     return (
@@ -23,8 +21,10 @@ const Routeer = () => {
                     <Route path="/phim/:fullname" element={<Movies />} />
                     <Route path="/tim-kiem/:inputext" element={<SearchMovie />} />
                     <Route path="/detail-movie/:slug" element={<DetailPage />} />
+                    {/* <Route path="/detail" element={<MovieNewUpDate />} /> */}
 
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     )

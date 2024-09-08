@@ -17,8 +17,9 @@ const Menu = () => {
     const handleNavigation = useCallback(
         e => {
             const window = e.currentTarget;
-            if (y > window.scrollY) {
-                setBg(false);
+            if (window.scrollY === 0) {
+                setBg(false)
+
             } else if (y < window.scrollY) {
                 setBg(true);
             }

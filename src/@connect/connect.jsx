@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     // Lấy danh sách phim lên trang chủ nhé https://phimapi.com/danh-sach/phim-moi-cap-nhat?page={ID Page}
     film: {
-        getlistfilm: (param)=> axios.get(`${process.env.REACT_APP_HOSTNAME}/danh-sach/phim-moi-cap-nhat`)
+        getlistfilm: (params)=> axios.get(`${process.env.REACT_APP_HOSTNAME}/danh-sach/phim-moi-cap-nhat`,{params})
     },
     // Lấy phim theo thể loại  https://phimapi.com/v1/api/danh-sach/phim-le
     updatefilm: {

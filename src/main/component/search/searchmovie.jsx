@@ -8,14 +8,12 @@ const SearchMovie = () => {
     const timkiem = useSelector(state => state.search)
     const { inputext } = useParams()
     const dispatch = useDispatch()
-    console.log(timkiem);
-    console.log(inputext);
 
     useEffect(() => {
         dispatch(search.timkiem({ keyword: inputext }))
     }, [dispatch, inputext])
     return (
-        <div className="flex flex-col mx-5">
+        <div className="flex flex-col mx-5 min-h-screen">
             <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">Tìm kiếm</h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-4 mt-5">
                 {
@@ -23,7 +21,7 @@ const SearchMovie = () => {
                         (movie) => (
                             <div className="relative">
                                 <div className="aspect-[2/3]">
-                                    <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} width={320} height={450} className="w-full rounded-lg h-full object-cover bg-no-repeat" alt="" />
+                                    <img loading="lazy" src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} width={320} height={450} className="w-full rounded-lg h-full object-cover bg-no-repeat" alt="" />
                                 </div>
                                 <span className="absolute top-1 left-2 bg-yellow-400 border rounded-lg p-1">{movie.episode_current}</span>
                                 <div className='flex justify-between my-2'>

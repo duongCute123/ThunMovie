@@ -43,4 +43,19 @@
   li{
     list-style-type: none;
   }
-  
+  .loading-bar {
+    @apply fixed top-0 left-0 w-full h-1 bg-yellow-400;
+    background: linear-gradient(90deg, #f3c614, #f3c614 50%, transparent 50%);
+    background-size: 200% 200%;
+    animation: loading 10S linear infinite;
+    z-index: 9999;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}

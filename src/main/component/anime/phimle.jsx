@@ -10,9 +10,9 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviele } from '../../../store/moviele';
+import { Link } from 'react-router-dom';
 const MoviLeSlide = () => {
     const phim = useSelector(state => state.le)
-    console.log(phim?.movies?.data?.items);
     const [slug, setSlug] = useState("phim-le")
     const dispatch = useDispatch()
     useEffect(() => {
@@ -54,11 +54,11 @@ const MoviLeSlide = () => {
                                     <SwiperSlide key={idx}>
                                         <div className='bg-black/95'>
                                             <div className='w-full h-auto relative aspect-[2/3]'>
-                                                <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} className='w-full rounded-md h-full duration-300 ' width={300} height={450} alt="" />
+                                                <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} loading='lazy' className='w-full rounded-md h-full duration-300 ' width={300} height={450} alt="" />
                                             </div>
                                             <span className='absolute top-3 left-4 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>
                                             <div className='flex justify-between my-2'>
-                                                <p className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</p>
+                                                <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
                                             <div className='flex justify-between'>

@@ -11,12 +11,14 @@ import { RiMovie2Fill } from "react-icons/ri";
 import { IoMdShare } from "react-icons/io";
 import { GiSelfLove } from "react-icons/gi";
 import ModalSocials from "../modal/modalmedial";
+import MovieNewUpDate from "../anime/movieupdate";
 const DetailPage = () => {
     const { slug } = useParams()
     const detais = useSelector(state => state.taps)
     const dispatch = useDispatch()
     const [current, setcurrent] = useState()
     const [server, setServer] = useState(false)
+
     useEffect(() => {
         if (detais?.movie?.episodes && detais.movie.episodes.length > 0) {
             const tap1 = detais.movie.episodes[0].server_data[0]
@@ -26,10 +28,15 @@ const DetailPage = () => {
 
     useEffect(() => {
         dispatch(episode.episodemovie({ slug: slug }))
-    }, [dispatch])
+    }, [dispatch, slug])
     const changeServer = () => {
         setServer(!server)
     }
+    useEffect(() => {
+        window.scrollTo({
+            top: 0
+        })
+    },[])
     const [showModal, setShowModal] = useState(false)
     const HandlerCloseModal = () => {
         setShowModal(false)
@@ -42,7 +49,7 @@ const DetailPage = () => {
                 <div className="inset-0 bg-black/90 px-4 pb-10 pt-24 flex items-center lg:absolute">
                     <div className="w-full max-w-7xl mx-auto flex flex-col items-center gap-8 md:flex-row">
                         <div className="bg-stone-900 overflow-hidden animate-none aspect-[2/3] rounded w-full max-w-[300px]">
-                            <img src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
+                            <img  loading="lazy" src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
                         </div>
                         <div className="w-full gap-4">
                             <h2 className="text-4xl lg:text-5xl font-extrabold text-white">{detais?.movie?.movie?.name}</h2>
@@ -74,7 +81,7 @@ const DetailPage = () => {
                                 </li>
                             </ul>
                             <p className="text-white mt-4">
-                                {detais?.movie?.movie?.content}
+                                {detais?.movie?.movie?.content.replace("&quot;","")}
                             </p>
                             <div className="mt-8 flex gap-8 items-center rounded-full border-2 p-1 lg:w-[400px] h-16">
                                 <button className="text-white hover:text-yellow-500 text-center border-r-2 w-20 flex flex-col items-center" onClick={() => { setShowModal(true) }} ><IoMdShare color="white" />Share</button>
@@ -94,7 +101,7 @@ const DetailPage = () => {
             <div className="text-white  mx-10">
                 {
                     detais?.movie?.episodes && (detais?.movie?.episodes.map((data) => (
-                        <div className="grid grid-cols-8 gap-2 lg:grid-cols-12" key={data.server_name}>
+                        <div className="grid grid-cols-6 gap-2 lg:grid-cols-12" key={data.server_name}>
                             {
                                 data?.server_data.map((episodes, idx) => (
                                     <div className={`items-center hover:bg-yellow-400 p-1.5 hover:text-black ${current?.name === episodes.name ? 'bg-yellow-400' : 'bg-black/95'}  text-center rounded-xl`} key={idx}>
@@ -142,6 +149,7 @@ const DetailPage = () => {
                     </div>
                 )
             }
+            <MovieNewUpDate />
         </div>
     )
 }
