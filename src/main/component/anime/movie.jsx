@@ -22,6 +22,9 @@ const Movies = () => {
     useEffect(() => {
         window.screenTop = 0
     }, [])
+    useEffect(() => {
+        document.title = `Phim ${fullname} | VueMov`
+    }, [fullname, page])
     return (
         <>
 
@@ -34,7 +37,13 @@ const Movies = () => {
                                 <div className="relative" key={idx}>
                                     <div className="aspect-[2/3]">
                                         <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} loading="lazy" width={320} height={450} className="w-full rounded-lg h-full object-cover bg-no-repeat" alt="" />
+                                        <div className={`absolute inset-0 bg-black/60 none flex-col items-center justify-center gap-4 text-sm font-bold opacity-0 hover:opacity-100 duration-300 text-center hidden md:flex`}>
+                                            <Link to={""} className='rounded-full w-36 px-6 py-2.5 translate-y-3 hover:translate-y-0 duration-300 bg-yellow-500 text-black'>Yêu thích</Link>
+                                            <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg- border-yellow-500 w-36 px-6 py-2.5 bg-black/70 translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-black'>Chi tiết</Link>
+                                        </div>
                                     </div>
+                                    <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
+
                                     <span className="absolute top-1 left-2 bg-yellow-400 border rounded-lg p-1">{movie.episode_current}</span>
                                     <div className='flex justify-between my-2'>
                                         <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>

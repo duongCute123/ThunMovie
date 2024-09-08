@@ -36,11 +36,15 @@ const DetailPage = () => {
         window.scrollTo({
             top: 0
         })
-    },[])
+    }, [])
     const [showModal, setShowModal] = useState(false)
     const HandlerCloseModal = () => {
         setShowModal(false)
     }
+    useEffect(() => {
+        document.title = `${detais?.movie?.movie?.name} | VueMov`
+    }, [detais])
+    
     return (
         <div>
             <div className="bg-cover w-full aspect-video relative bg-center lg:max-h-[800px]" style={
@@ -49,7 +53,7 @@ const DetailPage = () => {
                 <div className="inset-0 bg-black/90 px-4 pb-10 pt-24 flex items-center lg:absolute">
                     <div className="w-full max-w-7xl mx-auto flex flex-col items-center gap-8 md:flex-row">
                         <div className="bg-stone-900 overflow-hidden animate-none aspect-[2/3] rounded w-full max-w-[300px]">
-                            <img  loading="lazy" src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
+                            <img loading="lazy" src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
                         </div>
                         <div className="w-full gap-4">
                             <h2 className="text-4xl lg:text-5xl font-extrabold text-white">{detais?.movie?.movie?.name}</h2>
@@ -81,7 +85,7 @@ const DetailPage = () => {
                                 </li>
                             </ul>
                             <p className="text-white mt-4">
-                                {detais?.movie?.movie?.content.replace("&quot;","")}
+                                {detais?.movie?.movie?.content.replace("&quot;", "")}
                             </p>
                             <div className="mt-8 flex gap-8 items-center rounded-full border-2 p-1 lg:w-[400px] h-16">
                                 <button className="text-white hover:text-yellow-500 text-center border-r-2 w-20 flex flex-col items-center" onClick={() => { setShowModal(true) }} ><IoMdShare color="white" />Share</button>
