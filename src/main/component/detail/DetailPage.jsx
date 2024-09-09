@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { episode } from "../../../store/filmepisode";
 import { useParams } from "react-router-dom";
@@ -12,13 +12,15 @@ import { IoMdShare } from "react-icons/io";
 import { GiSelfLove } from "react-icons/gi";
 import ModalSocials from "../modal/modalmedial";
 import MovieNewUpDate from "../anime/movieupdate";
+import FallBack from "../fallback/fallback";
+import BeatLoader from "react-spinners/BeatLoader"
 const DetailPage = () => {
     const { slug } = useParams()
     const detais = useSelector(state => state.taps)
     const dispatch = useDispatch()
     const [current, setcurrent] = useState()
     const [server, setServer] = useState(false)
-
+    const iframeRef = useRef()
     useEffect(() => {
         if (detais?.movie?.episodes && detais.movie.episodes.length > 0) {
             const tap1 = detais.movie.episodes[0].server_data[0]
@@ -44,16 +46,33 @@ const DetailPage = () => {
     useEffect(() => {
         document.title = `${detais?.movie?.movie?.name} | VueMov`
     }, [detais])
-    
+    useEffect(() => {
+        if (iframeRef.current) {
+            iframeRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [current]);
+    const note = useSelector(state => state.message)
+    if (detais?.error)
+        return <FallBack error={detais?.error?.message} />
+    if (detais.loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <BeatLoader color="#f1c40f" loading={detais.loading} size={15} />
+            </div>
+        );
+    }
+    if (!detais) {
+        return <FallBack error={detais.payload.message} />
+    }
     return (
-        <div>
+        <div className="">
             <div className="bg-cover w-full aspect-video relative bg-center lg:max-h-[800px]" style={
                 { backgroundImage: `url(${detais?.movie?.movie?.thumb_url})` }
             }>
                 <div className="inset-0 bg-black/90 px-4 pb-10 pt-24 flex items-center lg:absolute">
                     <div className="w-full max-w-7xl mx-auto flex flex-col items-center gap-8 md:flex-row">
                         <div className="bg-stone-900 overflow-hidden animate-none aspect-[2/3] rounded w-full max-w-[300px]">
-                            <img loading="lazy" src={detais?.movie?.movie?.poster_url} alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
+                            <img loading="lazy" src={detais?.movie?.movie?.poster_url} draggable="false" alt="" className="duration-300 object-cover h-full w-full opacity-100 blur-none " width={300} height={450} />
                         </div>
                         <div className="w-full gap-4">
                             <h2 className="text-4xl lg:text-5xl font-extrabold text-white">{detais?.movie?.movie?.name}</h2>
@@ -102,7 +121,7 @@ const DetailPage = () => {
 
             </div>
             <h1 className="text-white text-3xl font-bold mt-8 mb-3 mx-5">Danh sách tập</h1>
-            <div className="text-white  mx-10">
+            <div className={`text-white  mx-10 ${detais?.movie?.episodes?.length > 60 ? '' : "h-44 overflow-y-auto"}`}>
                 {
                     detais?.movie?.episodes && (detais?.movie?.episodes.map((data) => (
                         <div className="grid grid-cols-6 gap-2 lg:grid-cols-12" key={data.server_name}>
@@ -141,6 +160,7 @@ const DetailPage = () => {
                                 :
                                 <>
                                     <iframe
+                                        ref={iframeRef}
                                         src={current.link_embed}
                                         className="w-11/12 items-center justify-center mx-auto"
                                         height="450"

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import { AiOutlineClose } from "react-icons/ai"
 import React, { useEffect, useRef, useState } from "react"
 const ModalSocial = ({ visible, closed }) => {
@@ -14,6 +14,7 @@ const ModalSocial = ({ visible, closed }) => {
     const handleNavigation = (e) => {
         if (e.key === "Enter") {
             navigation(`/tim-kiem/${inputext}`)
+            setInputext("")
             closed()
         }
     }

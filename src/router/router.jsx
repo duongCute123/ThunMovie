@@ -5,7 +5,6 @@ import SearchMovie from "../main/component/search/searchmovie"
 import DetailPage from "../main/component/detail/DetailPage"
 import Movies from "../main/component/anime/movie"
 import Footer from "../main/component/footer/footer."
-import MovieNewUpDate from "../main/component/anime/movieupdate"
 
 const Routeer = () => {
     return (

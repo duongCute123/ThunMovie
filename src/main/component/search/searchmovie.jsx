@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { search } from "../../../store/searchmovie";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import Menu from "../../../menu/menu";
+import { BeatLoader } from "react-spinners";
 
 const SearchMovie = () => {
     const timkiem = useSelector(state => state.search)
@@ -12,6 +12,13 @@ const SearchMovie = () => {
     useEffect(() => {
         dispatch(search.timkiem({ keyword: inputext }))
     }, [dispatch, inputext])
+    if (timkiem.loading) {
+        return (
+            <div className="flex inset-0 bg-black/90 justify-center items-center h-screen">
+                <BeatLoader color="#f1c40f" loading={timkiem.loading} size={15} />
+            </div>
+        );
+    }
     return (
         <div className="flex flex-col mx-5 min-h-screen">
             <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">Tìm kiếm</h1>

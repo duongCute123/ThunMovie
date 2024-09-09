@@ -9,14 +9,18 @@ import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { movie } from '../../../store/movieupdate';
+import FallBack from '../fallback/fallback';
 const MovieNewUpDate = () => {
     const page = 1
     const newupdate = useSelector(state => state.film)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(movie.getmoviehomepage({ page: page}))
+        dispatch(movie.getmoviehomepage({ page: page }))
     }, [dispatch])
+    if (newupdate.error) {
+        return <FallBack error={newupdate.error.message} />
+    }
     return (
         <div className="mx-8">
             <h1 className='text-3xl lg:text-4xl text-white font-bold mt-10 mb-4'>Phim mới cập nhật</h1>

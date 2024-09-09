@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { anime } from "../../../store/anime";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
+import FallBack from "../fallback/fallback";
+import { BeatLoader } from "react-spinners";
 const Movies = () => {
     const { fullname } = useParams()
     const timkiem = useSelector(state => state.categorymovie)
@@ -25,6 +27,15 @@ const Movies = () => {
     useEffect(() => {
         document.title = `Phim ${fullname} | VueMov`
     }, [fullname, page])
+    if (timkiem.error)
+        return <FallBack error={timkiem.error.message} />
+    if (timkiem.loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <BeatLoader color="#f1c40f" loading={timkiem.loading} size={15} />
+            </div>
+        );
+    }
     return (
         <>
 

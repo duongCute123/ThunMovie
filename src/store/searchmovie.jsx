@@ -16,7 +16,7 @@ export const search = {
 const SearchSlice = createSlice({
     name: `${AppName}/${ModuleName}`,
     initialState: {
-        loading: null,
+        loading: false,
         movie: [],
         error: null
     },
@@ -35,10 +35,10 @@ const SearchSlice = createSlice({
             .addCase(search.timkiem.fulfilled, (state, { payload }) => {
                 state.loading = false
                 state.movie = payload
-                state.error = false
+                state.error = null
             })
             .addCase(search.timkiem.rejected, (state, { error }) => {
-                state.loading = null
+                state.loading = false
                 state.movie = null
                 state.error = error
             })

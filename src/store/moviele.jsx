@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
 import connect from "../@connect/connect"
 
 const moduleName = "Le"
@@ -17,7 +16,7 @@ export const moviele = {
 const LeSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: null,
+        loading: false,
         error: null,
         movies: []
     },

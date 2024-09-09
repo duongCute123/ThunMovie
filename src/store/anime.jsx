@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
 import connect from "../@connect/connect"
 
 const moduleName = "Anime"
@@ -47,7 +46,7 @@ const AnimeSlice = createSlice({
                 state.movies = payload
             })
             .addCase(anime.getAnime.rejected, (state, { error }) => {
-                state.loading = null
+                state.loading = false
                 state.movies = {
                     data: []
                 }
@@ -66,7 +65,7 @@ const AnimeSlice = createSlice({
                 state.movies = payload
             })
             .addCase(anime.getMoviePageLimit.rejected, (state, { error }) => {
-                state.loading = null
+                state.loading = false
                 state.movies = {
                     data: []
                 }

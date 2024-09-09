@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import connect from "../@connect/connect"
-import { movie } from "./movieupdate"
+import { showMessage } from "./message"
+import getErrorMessage from "../widgets/GetErrorMessage"
 
 const AppName = "ThunMov"
 const moduleName = "tapphim"
@@ -10,6 +11,7 @@ export const episode = {
             const response = await connect.filmepisode.episode(params)
             return response.data
         } catch (error) {
+            thunkAPI.dispatch(showMessage({variant: error,message: getErrorMessage(error)}))
             return thunkAPI.fulfillWithValue(error)
         }
     })
@@ -17,7 +19,7 @@ export const episode = {
 const EpisodeSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: null,
+        loading: false,
         movie: [],
         error: null
     },
@@ -39,7 +41,7 @@ const EpisodeSlice = createSlice({
                 state.movie = payload
             })
             .addCase(episode.episodemovie.rejected, (state, { error }) => {
-                state.loading = null
+                state.loading = false
                 state.error = error
                 state.movie = null
             })

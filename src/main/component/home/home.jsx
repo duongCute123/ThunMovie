@@ -1,14 +1,10 @@
-import { useEffect, useRef, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { movie } from "../../../store/movieupdate"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import Menu from "../../../menu/menu";
-// import Anime from "../anime/anime";
+import { Autoplay } from 'swiper/modules';
 import AnimeSlide from "../anime/anime";
 import { IoIosTime } from "react-icons/io";
 import { FaRegClosedCaptioning } from "react-icons/fa6";
@@ -34,8 +30,6 @@ const Home = () => {
     return (
         <div>
             <div className="home relative">
-
-
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}
@@ -53,7 +47,7 @@ const Home = () => {
                                     style={{
                                         backgroundImage: `url('${process.env.REACT_APP_API_IMG}/${movie.thumb_url}')`
                                     }}>
-                                    <div className="absolute inset-0 bg-black/80 md:bg-black/90 flex">
+                                    <div className="absolute inset-0 bg-black/60 md:bg-black/90 flex">
                                         <div className="w-full max-w-7xl px-4 mx-auto flex items-center justify-between gap-8">
                                             <div className="flex flex-col text-xs">
                                                 <h2 className="text-white font-extrabold text-4xl lg:text-5xl leading-snug flex">{movie.name}</h2>
@@ -85,12 +79,12 @@ const Home = () => {
                         ))
                     }
                 </Swiper>
-
-
             </div>
-            <AnimeSlide />
-            <MoviLeSlide />
-            <MoviboSlide />
+            <div className="min-h-screen">
+                <AnimeSlide />
+                <MoviLeSlide />
+                <MoviboSlide />
+            </div>
         </div>
     )
 }

@@ -36,10 +36,10 @@ const MoviboSlide = () => {
                                     slidesPerView: 2, // 1 slide cho màn hình rất nhỏ
                                 },
                                 480: {
-                                    slidesPerView: 2, // 2 slides cho màn hình nhỏ
+                                    slidesPerView: 3, // 2 slides cho màn hình nhỏ
                                 },
                                 640: {
-                                    slidesPerView: 2,
+                                    slidesPerView: 3,
                                 },
                                 768: {
                                     slidesPerView: 3,
@@ -68,8 +68,8 @@ const MoviboSlide = () => {
                                             </div>
                                             <div className='flex justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white border-2 mx-2 w-[80px] h-[25px]'>{movie.quality}</li>
-                                                    <li className='bg-white md:w-[100px] md:h-[25px] font-bold'>{movie.lang}</li>
+                                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border-2  w-[80px] h-[25px]'>{movie.quality}</li>
+                                                    <li className='bg-white md:w-[100px] md:h-[25px] font-bold hidden md:flex justify-center items-center text-center'>{movie.lang}</li>
                                                 </ul>
                                                 <p className='hidden md:block text-white'>{movie.time}</p>
                                             </div>

@@ -5,13 +5,15 @@ import BoSlice from "./moviebo"
 import LeSlice from "./moviele"
 import SearchSlice from "./searchmovie"
 import EpisodeSlice from "./filmepisode"
+import MessageSlice from "./message"
 export const store = configureStore({
     reducer: {
-        film: MovieSlice,
-        categorymovie: AnimeSlice,
-        bo: BoSlice,
-        le: LeSlice,
-        search: SearchSlice,
-        taps: EpisodeSlice
+        film:           MovieSlice,
+        categorymovie:  AnimeSlice,
+        bo:             BoSlice,
+        le:             LeSlice,
+        search:         SearchSlice,
+        taps:           EpisodeSlice,
+        message:        MessageSlice
     }
 })

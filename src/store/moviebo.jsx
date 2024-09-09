@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
 import connect from "../@connect/connect"
 
 const moduleName = "Bo"
@@ -17,7 +16,7 @@ export const moviebo = {
 const BoSlice = createSlice({
     name: `${AppName}/${moduleName}`,
     initialState: {
-        loading: null,
+        loading: false,
         error: null,
         movies: []
     },
@@ -39,7 +38,7 @@ const BoSlice = createSlice({
                 state.movies = payload
             })
             .addCase(moviebo.getAnime.rejected, (state, { error }) => {
-                state.loading = null
+                state.loading = false
                 state.movies = {
                     data: []
                 }
