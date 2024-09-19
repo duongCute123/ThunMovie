@@ -6,6 +6,8 @@ import LeSlice from "./moviele"
 import SearchSlice from "./searchmovie"
 import EpisodeSlice from "./filmepisode"
 import MessageSlice from "./message"
+import GenreSlice from "./genremovies"
+import CountriesSlice from "./countries"
 export const store = configureStore({
     reducer: {
         film:           MovieSlice,
@@ -14,6 +16,8 @@ export const store = configureStore({
         le:             LeSlice,
         search:         SearchSlice,
         taps:           EpisodeSlice,
-        message:        MessageSlice
+        message:        MessageSlice,
+        genres :        GenreSlice,
+        quocgia:    CountriesSlice
     }
 })

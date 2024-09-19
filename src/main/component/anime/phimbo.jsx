@@ -57,7 +57,7 @@ const MoviboSlide = () => {
                                                 <img src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} loading='lazy' className='w-full rounded-md h-full duration-300 ' width={300} height={450} alt="" />
                                                 <div className={`absolute inset-0 bg-black/60 none flex-col items-center justify-center gap-4 text-sm font-bold opacity-0 hover:opacity-100 duration-300 text-center hidden md:flex`}>
                                                     <Link to={""} className='rounded-full w-36 px-6 py-2.5 translate-y-3 hover:translate-y-0 duration-300 bg-yellow-500 text-black'>Yêu thích</Link>
-                                                    <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg- border-yellow-500 w-36 px-6 py-2.5 bg-black/70 translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-black'>Chi tiết</Link>
+                                                    <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg- border-yellow-500 w-36 px-6 py-2.5 bg-white translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-white text-black'>Chi tiết</Link>
                                                 </div>
                                             </div>
                                             <span className='absolute top-3 left-4 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>

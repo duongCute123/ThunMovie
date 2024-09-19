@@ -78,7 +78,7 @@ const DetailPage = () => {
                             <h2 className="text-4xl lg:text-5xl font-extrabold text-white">{detais?.movie?.movie?.name}</h2>
                             <a className="text-yellow-500">{detais?.movie?.movie?.origin_name}</a>
                             <div className="flex flex-row text-white gap-4 mt-8 items-center">
-                                <li className="w-28 bg-white p-0.5 border text-black text-center">Tập {detais?.movie?.movie?.episode_current.replace("Tập ", "")}/{detais?.movie?.movie?.episode_total}</li>
+                                <li className="w-28 bg-white p-0.5 border text-black text-center">{detais?.movie?.movie?.episode_current}</li>
                                 <li className="border-2 border-white p-0.5">{detais?.movie?.movie?.quality}</li>
                                 <ul className="flex gap-4">
                                     {
@@ -121,7 +121,7 @@ const DetailPage = () => {
 
             </div>
             <h1 className="text-white text-3xl font-bold mt-8 mb-3 mx-5">Danh sách tập</h1>
-            <div className={`text-white  mx-10 ${detais?.movie?.episodes?.length > 60 ? '' : "h-44 overflow-y-auto"}`}>
+            <div className={`text-white  mx-10 ${detais?.movie?.episodes?.length > 60 ? '' : "h-[400px] overflow-y-auto"}`}>
                 {
                     detais?.movie?.episodes && (detais?.movie?.episodes.map((data) => (
                         <div className="grid grid-cols-6 gap-2 lg:grid-cols-12" key={data.server_name}>
@@ -160,11 +160,11 @@ const DetailPage = () => {
                                 :
                                 <>
                                     <iframe
-                                        ref={iframeRef}
+                                        // ref={iframeRef}
                                         src={current.link_embed}
-                                        className="w-11/12 items-center justify-center mx-auto"
-                                        height="450"
+                                        className="w-full items-center justify-center mx-auto"
                                         title={current.name}
+                                        height={600}
                                         frameBorder="0"
                                         allowFullScreen
                                     ></iframe>

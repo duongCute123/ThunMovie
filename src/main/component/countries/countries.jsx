@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { countries } from "../../../store/countries";
 import { Link, useParams } from "react-router-dom";
-import { anime } from "../../../store/anime";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
-const Movies = () => {
-    const { fullname } = useParams()
-    const timkiem = useSelector(state => state.categorymovie)
+const CountriesMovies = () => {
+    const { slug } = useParams()
+    const countri = useSelector(state => state.quocgia)
     const [page, setPage] = useState(1)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(anime.getMoviePageLimit({ slug: fullname, page: page, limit: 24 }))
-    }, [dispatch, fullname, page])
-    const toTalPage = timkiem?.movies?.data?.params?.pagination?.totalPages
+        dispatch(countries.getMoviesCountries({ slug: slug, page: page, limit: 24 }))
+    }, [dispatch, slug, page])
+    const toTalPage = countri?.moviecountries?.data?.params?.pagination?.totalPages
     const handlePageChange = (selectedPage) => {
         setPage(selectedPage.selected + 1);
         window.scrollTo({
@@ -25,14 +25,14 @@ const Movies = () => {
         window.screenTop = 0
     }, [])
     useEffect(() => {
-        document.title = `Phim ${fullname} | VueMov`
-    }, [fullname, page])
-    if (timkiem.error)
-        return <FallBack error={timkiem.error.message} />
-    if (timkiem.loading) {
+        document.title = `Phim ${slug} | VueMov`
+    }, [slug, page])
+    if (countri.error)
+        return <FallBack error={countri.error.message} />
+    if (countri.loading) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <BeatLoader color="#f1c40f" loading={timkiem.loading} size={15} />
+                <BeatLoader color="#f1c40f" loading={countri.loading} size={15} />
             </div>
         );
     }
@@ -40,10 +40,10 @@ const Movies = () => {
         <>
 
             <div className="flex flex-col mx-5 min-h-screen">
-                <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{timkiem?.movies?.data?.titlePage}</h1>
+                <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">Phim {countri?.moviecountries?.data?.titlePage}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
                     {
-                        timkiem?.movies?.data?.items && timkiem?.movies?.data?.items.map(
+                        countri?.moviecountries?.data?.items && countri?.moviecountries?.data?.items.map(
                             (movie, idx) => (
                                 <div className="relative" key={idx}>
                                     <div className="aspect-[2/3] relative">
@@ -72,7 +72,7 @@ const Movies = () => {
                     }
                 </div>
                 {
-                    timkiem.loading ?
+                    countri.loading ?
                         <></>
                         :
                         <div className='text-white my-6 mt-8'>
@@ -105,4 +105,4 @@ const Movies = () => {
         </>
     )
 }
-export default Movies
+export default CountriesMovies

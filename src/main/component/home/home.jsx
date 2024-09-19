@@ -14,11 +14,24 @@ import MoviLeSlide from "../anime/phimle";
 import MoviboSlide from "../anime/phimbo";
 import { anime } from "../../../store/anime";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import CountriesSlide from "../countries/countriesslide";
+import GenresSlide from "../genres/genresslide";
 const Home = () => {
     const phim = useSelector(state => state.categorymovie)
     const [slug, setSlug] = useState("hoat-hinh")
     const dispatch = useDispatch()
+    useEffect(() => {
+        axios.get("https://ophim1.com/v1/api/the-loai/hanh-dong?page=1")
+            .then(res => {
+                console.log(res.data);
 
+            })
+            .catch(err => {
+                console.log(err);
+
+            })
+    }, [])
     useEffect(() => {
         dispatch(anime.getAnime({ slug: slug }))
     }, [dispatch])
@@ -27,6 +40,9 @@ const Home = () => {
             top: 0
         })
     })
+    useEffect(() => {
+        document.title = "VueMov - Xem phim online miễn phí không quảng cáo || VueMov"
+    }, [])
     return (
         <div>
             <div className="home relative">
@@ -84,6 +100,8 @@ const Home = () => {
                 <AnimeSlide />
                 <MoviLeSlide />
                 <MoviboSlide />
+                <CountriesSlide />
+                <GenresSlide />
             </div>
         </div>
     )

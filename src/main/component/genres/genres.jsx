@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { genresmovie } from "../../../store/genremovies";
 import { Link, useParams } from "react-router-dom";
-import { anime } from "../../../store/anime";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
-const Movies = () => {
-    const { fullname } = useParams()
-    const timkiem = useSelector(state => state.categorymovie)
+const Genres = () => {
+    const { slug } = useParams()
+    const genres = useSelector(state => state.genres)
     const [page, setPage] = useState(1)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(anime.getMoviePageLimit({ slug: fullname, page: page, limit: 24 }))
-    }, [dispatch, fullname, page])
-    const toTalPage = timkiem?.movies?.data?.params?.pagination?.totalPages
+        dispatch(genresmovie.categoriesfilm({ slug: slug, page: page, limit: 24 }))
+    }, [dispatch, slug, page])
+    const toTalPage = genres?.genres?.data?.params?.pagination?.totalPages
     const handlePageChange = (selectedPage) => {
         setPage(selectedPage.selected + 1);
         window.scrollTo({
@@ -25,14 +25,14 @@ const Movies = () => {
         window.screenTop = 0
     }, [])
     useEffect(() => {
-        document.title = `Phim ${fullname} | VueMov`
-    }, [fullname, page])
-    if (timkiem.error)
-        return <FallBack error={timkiem.error.message} />
-    if (timkiem.loading) {
+        document.title = `Phim ${slug} | VueMov`
+    }, [slug, page])
+    if (genres.error)
+        return <FallBack error={genres.error.message} />
+    if (genres.loading) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <BeatLoader color="#f1c40f" loading={timkiem.loading} size={15} />
+                <BeatLoader color="#f1c40f" loading={genres.loading} size={15} />
             </div>
         );
     }
@@ -40,10 +40,10 @@ const Movies = () => {
         <>
 
             <div className="flex flex-col mx-5 min-h-screen">
-                <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{timkiem?.movies?.data?.titlePage}</h1>
+                <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{genres?.genres?.data?.titlePage}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
                     {
-                        timkiem?.movies?.data?.items && timkiem?.movies?.data?.items.map(
+                        genres?.genres?.data?.items && genres?.genres?.data?.items.map(
                             (movie, idx) => (
                                 <div className="relative" key={idx}>
                                     <div className="aspect-[2/3] relative">
@@ -55,15 +55,15 @@ const Movies = () => {
                                     </div>
                                     <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
 
-                                    <span className="absolute top-1 left-2 bg-yellow-400 border rounded-lg p-1">{movie.episode_current}</span>
+                                    <span className="absolute top-1 left-2 bg-yellow-400 border rounded-lg px-2">{movie.episode_current}</span>
                                     <div className='flex justify-between my-2'>
                                         <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                         <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                     </div>
                                     <div className='flex justify-between'>
                                         <ul className=' flex gap-1'>
-                                            <li className='text-yellow-400 text-center border-y-white border-2 flex justify-center mx-auto items-center w-[80px] h-[25px]'>{movie.quality}</li>
-                                            <li className='bg-white md:w-[100px] md:h-[25px] flex justify-center mx-auto items-center font-bold text-center'>{movie.lang}</li>
+                                            <li className='text-yellow-400 text-center border-y-white border-2 flex justify-center mx-auto items-center px-0.5'>{movie.quality}</li>
+                                            <li className='bg-white px-0.5 flex justify-center mx-auto items-center font-bold text-center'>{movie.lang}</li>
                                         </ul>
                                         <p className='hidden md:block text-white'>{movie.time}</p>
                                     </div>
@@ -72,7 +72,7 @@ const Movies = () => {
                     }
                 </div>
                 {
-                    timkiem.loading ?
+                    genres.loading ?
                         <></>
                         :
                         <div className='text-white my-6 mt-8'>
@@ -105,4 +105,4 @@ const Movies = () => {
         </>
     )
 }
-export default Movies
+export default Genres
