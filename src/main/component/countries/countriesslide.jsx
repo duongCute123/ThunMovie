@@ -7,10 +7,9 @@ const CountriesSlide = () => {
     const quocgia = "han-quoc"
     const page = 1
     const countri = useSelector(state => state.quocgia)
-    console.log(countri);
     const dispatch = useDispatch()
     const LayQuocGia = () => {
-        dispatch(countries.getMoviesCountries({ slug: quocgia, page: page ,limit:10}))
+        dispatch(countries.getMoviesCountries({ slug: quocgia, page: page, limit: 10 }))
     }
     useEffect(() => {
         LayQuocGia()
@@ -35,12 +34,15 @@ const CountriesSlide = () => {
                                 <Link to={`/detail-movie/${countries.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{countries.name}</Link>
                                 <p className='hidden md:block text-yellow-400'>{countries.year}</p>
                             </div>
-                            <div className='flex justify-between'>
+                            <div className='flex  justify-between mx-auto items-center'>
                                 <ul className=' flex gap-1'>
-                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border-2  w-[80px] h-[25px]'>{countries.quality}</li>
-                                    <li className='bg-white md:w-[100px] md:h-[25px] font-bold hidden md:flex justify-center items-center text-center'>{countries.lang}</li>
+                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border xl:w-[80px] xl:h-[25px]  px-0.5'>{countries.quality}</li>
+                                    <li className='bg-white px-0.5 xl:w-[100px] lg:h-[25px] font-bold line-clamp-1  md:flex justify-center items-center text-center'>{countries.lang
+                                        .replace("+ Thuyết Minh", "")
+                                        .replace("+ Lồng Tiếng", "")}
+                                    </li>
                                 </ul>
-                                <p className='hidden md:block text-white'>{countries.time}</p>
+                                <p className='block text-white'>{countries.time.replace("/tập", "")}</p>
                             </div>
                         </div>
                     ))

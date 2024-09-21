@@ -61,14 +61,14 @@ const Menu = () => {
         <div className={`fixed z-40 ${bgnen ? 'bg-black' : 'bg-transparent'} top-0 inset-x-0 py-4 duration-300`}>
             <div className="px-4 mx-auto items-center flex justify-between  flex-row gap-5 text-white font-semibold">
                 <div className="flex flex-row items-center justify-end">
-                    <Link to={"/"} className="flex items-center gap-2 hover:text-yellow-500">
+                    <div to={"/"} className="flex items-center gap-2 hover:text-yellow-500">
                         <SiVuetify className="text-yellow-500" size={35} />
                         <ul>
                             <li>
                                 <Link to={"/"} className="font-bold size-8 hover:text-yellow-500 text-white text-lg">VueMov</Link>
                             </li>
                         </ul>
-                    </Link>
+                    </div>
                     <FaSearch color="yellow" size={25} onClick={toggleModal} className="fixed right-20 lg:hidden" />
                     <ModalSocial closed={toggleModal} visible={showModal} />
                     {

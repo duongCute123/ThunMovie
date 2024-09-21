@@ -23,7 +23,21 @@ const MoviboSlide = () => {
         <div className='my-5 '>
             {
                 phim.loading ?
-                    <></>
+                    <div class="border border-blue-300 shadow rounded-md p-4  w-full mx-auto">
+                        <div class="animate-pulse flex space-x-4">
+                            <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+                            <div class="flex-1 space-y-6 py-1">
+                                <div class="h-2 bg-slate-700 rounded"></div>
+                                <div class="space-y-3">
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                                        <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     :
                     <div className="mx-4">
                         <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim bộ</h1>
@@ -42,10 +56,10 @@ const MoviboSlide = () => {
                                     slidesPerView: 3,
                                 },
                                 768: {
-                                    slidesPerView: 3,
+                                    slidesPerView: 4,
                                 },
                                 1024: {
-                                    slidesPerView: 4,
+                                    slidesPerView: 5,
                                 },
                             }}
                         >
@@ -66,12 +80,15 @@ const MoviboSlide = () => {
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
-                                            <div className='flex justify-between'>
+                                            <div className='flex  justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border-2  w-[80px] h-[25px]'>{movie.quality}</li>
-                                                    <li className='bg-white md:w-[100px] md:h-[25px] font-bold hidden md:flex justify-center items-center text-center'>{movie.lang}</li>
+                                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border  px-0.5'>{movie.quality}</li>
+                                                    <li className='bg-white px-0.5 font-bold line-clamp-1  md:flex justify-center items-center text-center'>{movie.lang
+                                                        .replace("+ Thuyết Minh", "")
+                                                        .replace("+ Lồng Tiếng", "")}
+                                                    </li>
                                                 </ul>
-                                                <p className='hidden md:block text-white'>{movie.time}</p>
+                                                <p className='block text-white'>{movie.time.replace("/tập", "")}</p>
                                             </div>
                                         </div>
                                     </SwiperSlide>

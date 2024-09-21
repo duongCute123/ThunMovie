@@ -14,7 +14,6 @@ const GenresSlide = () => {
     useEffect(() => {
         GetGenresMovies()
     }, [])
-    console.log(genres);
     return (
         <div className="mx-4">
             <h1 className="text-4xl font-bold text-white mt-10 mb-5">Phim 18+</h1>
@@ -38,9 +37,9 @@ const GenresSlide = () => {
                             <div className='flex justify-between'>
                                 <ul className=' flex gap-1'>
                                     <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border-2  px-0.5'>{countries.quality}</li>
-                                    <li className='bg-white px-0.5 font-bold hidden md:flex justify-center items-center text-center'>{countries.lang}</li>
+                                    <li className='bg-white px-0.5 font-bold flex mx-auto justify-center items-center text-center'>{countries.lang}</li>
                                 </ul>
-                                <p className='hidden md:block text-white'>{countries.time}</p>
+                                <p className=' text-white'>{countries.time}</p>
                             </div>
                         </div>
                     ))

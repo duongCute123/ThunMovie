@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { anime } from '../../../store/anime';
-import { Link } from 'react-router-dom';
+import { Link, replace } from 'react-router-dom';
 const AnimeSlide = () => {
     const phim = useSelector(state => state.categorymovie)
     const [slug, setSlug] = useState("hoat-hinh")
@@ -29,7 +29,21 @@ const AnimeSlide = () => {
         <div>
             {
                 phim.loading ?
-                    <></>
+                    <div class="border border-blue-300 shadow rounded-md p-4  w-full mx-auto">
+                        <div class="animate-pulse flex space-x-4">
+                            <div class="rounded-full bg-slate-700 h-10 w-10"></div>
+                            <div class="flex-1 space-y-6 py-1">
+                                <div class="h-2 bg-slate-700 rounded"></div>
+                                <div class="space-y-3">
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <div class="h-2 bg-slate-700 rounded col-span-2"></div>
+                                        <div class="h-2 bg-slate-700 rounded col-span-1"></div>
+                                    </div>
+                                    <div class="h-2 bg-slate-700 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     :
                     <div className="mx-4">
                         <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim hoạt hinh</h1>
@@ -56,6 +70,7 @@ const AnimeSlide = () => {
                             }}
                         >
                             {
+
                                 phim?.movies?.data?.items && phim?.movies?.data?.items.map((movie, idx) => (
                                     <SwiperSlide key={idx}>
                                         <div className='bg-black/95'>
@@ -72,12 +87,12 @@ const AnimeSlide = () => {
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
-                                            <div className='flex justify-between'>
+                                            <div className='flex  justify-between'>
                                                 <ul className=' flex gap-1'>
                                                     <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border  px-0.5'>{movie.quality}</li>
-                                                    <li className='bg-white px-0.5 font-bold hidden md:flex justify-center items-center text-center'>{movie.lang}</li>
+                                                    <li className='bg-white px-0.5 font-bold  md:flex justify-center items-center text-center'>{movie.lang}</li>
                                                 </ul>
-                                                <p className='hidden md:block text-white'>{movie.time}</p>
+                                                <p className='block text-white'>{movie.time.replace("/tập", "")}</p>
                                             </div>
                                         </div>
                                     </SwiperSlide>

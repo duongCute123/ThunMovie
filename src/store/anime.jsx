@@ -4,17 +4,17 @@ import connect from "../@connect/connect"
 const moduleName = "Anime"
 const AppName = "ThunMovie"
 export const anime = {
-    getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (param, thunkAPI) => {
+    getAnime: createAsyncThunk(`${AppName}/${moduleName}/category`, async (params, thunkAPI) => {
         try {
-            const responsive = await connect.updatefilm.filmnotpagelimit(param)
+            const responsive = await connect.updatefilm.filmnotpagelimit(params)
             return responsive.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
         }
     }),
-    getMoviePageLimit: createAsyncThunk(`${AppName}/${moduleName}/pagelimit`, async (param, thunkAPI) => {
+    getMoviePageLimit: createAsyncThunk(`${AppName}/${moduleName}/pagelimit`, async (params, thunkAPI) => {
         try {
-            const responsive = await connect.updatefilm.filmnewupdate(param)
+            const responsive = await connect.updatefilm.filmnewupdate(params)
             return responsive.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
