@@ -47,7 +47,7 @@ const GenresSlide = () => {
 
             </div>
             <Link to={`/genres/${theloai}`} className='mx-auto my-6 justify-center flex text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[150px]  font-bold text-lg
-             h-[50px] border border-y-amber-300'>Xem tất cả</Link>
+             h-[35px] border border-y-amber-300'>Xem tất cả</Link>
         </div>
     )
 }

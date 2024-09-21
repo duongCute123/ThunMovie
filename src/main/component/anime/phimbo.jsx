@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { CiClock1 } from "react-icons/ci";
 
 // import required modules
 import { Pagination } from 'swiper/modules';
@@ -74,21 +75,24 @@ const MoviboSlide = () => {
                                                     <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg- border-yellow-500 w-36 px-6 py-2.5 bg-white translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-white text-black'>Chi tiết</Link>
                                                 </div>
                                             </div>
-                                            <span className='absolute top-3 left-4 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>
+                                            <span className='absolute top-3 left-1 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>
                                             <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
                                             <div className='flex justify-between my-2'>
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
-                                            <div className='flex  justify-between'>
+                                            <div className='flex flex-col gap-1 lg:flex-row lg:justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border  px-0.5'>{movie.quality}</li>
-                                                    <li className='bg-white px-0.5 font-bold line-clamp-1  md:flex justify-center items-center text-center'>{movie.lang
+                                                    <li className='text-yellow-400 border-y-white text-center lg:mx-auto lg:flex lg:justify-center items-center  border  px-0.5'>{movie.quality}</li>
+                                                    <li className='bg-white px-0.5 font-bold line-clamp-1  flex justify-center items-center text-center'>{movie.lang
                                                         .replace("+ Thuyết Minh", "")
                                                         .replace("+ Lồng Tiếng", "")}
                                                     </li>
                                                 </ul>
-                                                <p className='block text-white'>{movie.time.replace("/tập", "")}</p>
+                                                <ul className='flex items-center gap-0.5'>
+                                                    <CiClock1 color='yellow' />
+                                                    <p className='block text-white items-center'>{movie.time.replace("/tập", "")}</p>
+                                                </ul>
                                             </div>
                                         </div>
                                     </SwiperSlide>
@@ -96,7 +100,7 @@ const MoviboSlide = () => {
                             }
                         </Swiper>
                         <Link to={`/phim/${slug}`} className='mx-auto my-6 justify-center flex text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[150px]  font-bold text-lg
-             h-[50px] border border-y-amber-300'>Xem tất cả</Link>
+             h-[40px] border border-y-amber-300'>Xem tất cả</Link>
                     </div>
             }
         </div>

@@ -46,11 +46,12 @@ const DetailPage = () => {
     useEffect(() => {
         document.title = `${detais?.movie?.movie?.name} | VueMov`
     }, [detais])
-    useEffect(() => {
+    const scrollToVideo = (episodes) => {
+        setcurrent(episodes)
         if (iframeRef.current) {
             iframeRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-    }, [current]);
+    };
     const note = useSelector(state => state.message)
     if (detais?.error)
         return <FallBack error={detais?.error?.message} />
@@ -94,7 +95,7 @@ const DetailPage = () => {
                                 <li className="flex items-center"><FaRegClosedCaptioning color="yellow" />{detais?.movie?.movie?.lang}</li>
                             </ul>
                             <ul className="flex gap-4 text-white mt-4">
-                                <li className="flex items-center gap-2"><RiMovie2Fill color="yellow" />{detais?.movie?.movie?.episode_current}/{detais?.movie?.movie?.episode_total}</li>
+                                <li className="flex items-center gap-2"><RiMovie2Fill color="yellow" />{detais?.movie?.movie?.episode_current}</li>
                                 <li>
                                     {
                                         detais?.movie?.movie?.country.map((country) => (
@@ -121,14 +122,14 @@ const DetailPage = () => {
 
             </div>
             <h1 className="text-white text-3xl font-bold mt-8 mb-3 mx-5">Danh sách tập</h1>
-            <div className={`text-white  mx-10 ${detais?.movie?.episodes?.length > 60 ? '' : "h-[400px] overflow-y-auto"}`}>
+            <div className={`text-white  mx-10 ${detais?.movie?.episodes?.length > 60 ? 'h-[400px] overflow-y-auto' : "overflow-y-auto"}`}>
                 {
                     detais?.movie?.episodes && (detais?.movie?.episodes.map((data) => (
                         <div className="grid grid-cols-6 gap-2 lg:grid-cols-12" key={data.server_name}>
                             {
                                 data?.server_data.map((episodes, idx) => (
                                     <div className={`items-center hover:bg-yellow-400 p-1.5 hover:text-black ${current?.name === episodes.name ? 'bg-yellow-400' : 'bg-black/95'}  text-center rounded-xl`} key={idx}>
-                                        <button onClick={() => setcurrent(episodes)} className="">{episodes.name.replace("Tập ", "")}</button>
+                                        <button onClick={()=>scrollToVideo(episodes)} className="">{episodes.name.replace("Tập ", "")}</button>
                                     </div>
                                 ))
                             }
@@ -145,7 +146,7 @@ const DetailPage = () => {
             </div>
             {
                 current && (
-                    <div className="mx-8 lg:mx-14 items-center justify-center text-center">
+                    <div ref={iframeRef} className="relative w-11/12 flex items-center mx-auto pb-[56.25%] overflow-hidden">
                         {
                             server ?
                                 <ReactPlayer
@@ -155,16 +156,14 @@ const DetailPage = () => {
                                     volume={1}
                                     width="100%"
                                     height="100%"
+                                    className="absolute top-0 left-0"
                                     pip={true}
                                 />
-                                :
-                                <>
+                                : <>
                                     <iframe
-                                        // ref={iframeRef}
                                         src={current.link_embed}
-                                        className="w-full items-center justify-center mx-auto"
+                                        className="absolute top-0 left-0 w-full h-full"
                                         title={current.name}
-                                        height={600}
                                         frameBorder="0"
                                         allowFullScreen
                                     ></iframe>

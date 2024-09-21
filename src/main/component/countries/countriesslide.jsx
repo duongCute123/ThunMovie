@@ -17,7 +17,7 @@ const CountriesSlide = () => {
     return (
         <div className="mx-4">
             <h1 className="text-4xl font-bold text-white mt-10 mb-5">Phim theo quốc gia</h1>
-            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {
                     countri?.moviecountries?.data?.items && countri?.moviecountries?.data?.items.map((countries, idx) => (
                         <div className='mt-3 relative' key={idx}>
@@ -50,7 +50,7 @@ const CountriesSlide = () => {
 
             </div>
             <Link to={`/phim/${quocgia}`} className='mx-auto my-6 justify-center flex text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[150px]  font-bold text-lg
-             h-[50px] border border-y-amber-300'>Xem tất cả</Link>
+             h-[35px] border border-y-amber-300'>Xem tất cả</Link>
         </div>
     )
 }

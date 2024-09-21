@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import { CiClock1 } from "react-icons/ci";
 // import required modules
 import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
@@ -81,18 +81,21 @@ const AnimeSlide = () => {
                                                     <Link to={`/detail-movie/${movie.slug}`} className='rounded-full border-2 bg-white border-yellow-500 w-36 px-6 py-2.5 bg-black/70 translate-y-3 hover:translate-y-0 duration-300 hover:bg-yellow-500 hover:text-black'>Chi tiết</Link>
                                                 </div>
                                             </div>
-                                            <span className='absolute top-2 left-1 border border-yellow-400 rounded-md px-2 mx-2 bg-yellow-300'>{movie.episode_current}</span>
+                                            <span className='absolute top-3 left-1 border border-yellow-400 rounded-md lg:px-2 mx-2 bg-yellow-300'>{movie.episode_current}</span>
                                             <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
                                             <div className='flex justify-between my-2'>
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
-                                            <div className='flex  justify-between'>
+                                            <div className='flex flex-col lg:flex-row gap-1 lg:justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white text-center mx-auto flex justify-center items-center  border  px-0.5'>{movie.quality}</li>
-                                                    <li className='bg-white px-0.5 font-bold  md:flex justify-center items-center text-center'>{movie.lang}</li>
+                                                    <li className='text-yellow-400 border-y-white text-center lg:mx-auto lg:flex lg:justify-center items-center  border px-[0.5px] '>{movie.quality}</li>
+                                                    <li className='bg-white font-bold  flex justify-center items-center text-center'>{movie.lang}</li>
                                                 </ul>
-                                                <p className='block text-white'>{movie.time.replace("/tập", "")}</p>
+                                                <ul className='flex items-center gap-1'>
+                                                    <CiClock1 color='yellow' />
+                                                    <p className='block text-white'>{movie.time.replace("/tập", "")}</p>
+                                                </ul>
                                             </div>
                                         </div>
                                     </SwiperSlide>
@@ -100,7 +103,7 @@ const AnimeSlide = () => {
                             }
                         </Swiper>
                         <Link to={`/phim/${slug}`} className='mx-auto my-6 justify-center flex text-white hover:text-black hover:bg-yellow-400 text-center align-baseline items-center w-[150px]  font-bold text-lg
-             h-[50px] border border-y-amber-300'>Xem tất cả</Link>
+             h-[40px] border border-y-amber-300'>Xem tất cả</Link>
                     </div>
             }
         </div>
