@@ -6,6 +6,7 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 const Movies = () => {
     const { fullname } = useParams()
     const timkiem = useSelector(state => state.categorymovie)
@@ -24,9 +25,7 @@ const Movies = () => {
     useEffect(() => {
         window.screenTop = 0
     }, [])
-    useEffect(() => {
-        document.title = `Phim ${fullname} | VueMov`
-    }, [fullname, page])
+
     if (timkiem.error)
         return <FallBack error={timkiem.error.message} />
     if (timkiem.loading) {
@@ -38,7 +37,11 @@ const Movies = () => {
     }
     return (
         <>
-
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>phim || VueMov</title>
+                <link rel="canonical" href="https://thun-movie.vercel.app" />
+            </Helmet>
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{timkiem?.movies?.data?.titlePage}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">

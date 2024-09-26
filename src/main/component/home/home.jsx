@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { Helmet } from "react-helmet";
 import { Autoplay } from 'swiper/modules';
 import AnimeSlide from "../anime/anime";
 import { IoIosTime } from "react-icons/io";
@@ -31,12 +32,13 @@ const Home = () => {
             top: 0
         })
     })
-    useEffect(() => {
-        document.title = "VueMov - Xem phim online miễn phí không quảng cáo || VueMov"
-    }, [])
-
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>VueMov - Xem phim online miễn phí không quảng cáo || VueMov</title>
+                <link rel="canonical" href="https://thun-movie.vercel.app" />
+            </Helmet>
             {
                 phim.loading ?
                     <div className="flex justify-center items-center h-screen">
