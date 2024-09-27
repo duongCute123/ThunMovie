@@ -6,15 +6,17 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 const CountriesMovies = () => {
     const { slug } = useParams()
     const countri = useSelector(state => state.quocgia)
     const [page, setPage] = useState(1)
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(countries.getMoviesCountries({ slug: slug, page: page, limit: 24 }))
     }, [dispatch, slug, page])
-    const toTalPage = countri?.moviecountries?.data?.params?.pagination?.totalPages
+    const toTalPage = Math.ceil(countri?.moviecountries?.data?.params?.pagination?.totalPages)
     const handlePageChange = (selectedPage) => {
         setPage(selectedPage.selected + 1);
         window.scrollTo({
@@ -22,11 +24,10 @@ const CountriesMovies = () => {
         })
     };
     useEffect(() => {
-        window.screenTop = 0
+        window.scrollTo({
+            top: 0
+        })
     }, [])
-    useEffect(() => {
-        document.title = `Phim ${slug} | VueMov`
-    }, [slug, page])
     if (countri.error)
         return <FallBack error={countri.error.message} />
     if (countri.loading) {
@@ -38,6 +39,11 @@ const CountriesMovies = () => {
     }
     return (
         <>
+            <Helmet>
+                <title>{countri?.moviecountries?.data?.seoOnPage?.titleHead || 'VueMov'} | VueMov</title>
+                <meta name="description" content={`Xem phim ${countri?.moviecountries?.data?.seoOnPage?.descriptionHead} tại VueMov.`} />
+                <meta name="keywords" content={`${countri?.moviecountries?.data?.seoOnPage?.titleHead},${countri?.moviecountries?.data?.seoOnPage?.descriptionHead}, ${slug}, VueMov`} />
+            </Helmet>
 
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">Phim {countri?.moviecountries?.data?.titlePage}</h1>

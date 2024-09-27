@@ -14,12 +14,14 @@ import ModalSocials from "../modal/modalmedial";
 import MovieNewUpDate from "../anime/movieupdate";
 import FallBack from "../fallback/fallback";
 import BeatLoader from "react-spinners/BeatLoader"
+import { Helmet } from "react-helmet";
 const DetailPage = () => {
     const { slug } = useParams()
     const detais = useSelector(state => state.taps)
+
     const dispatch = useDispatch()
     const [current, setcurrent] = useState()
-    const [server, setServer] = useState(false)
+    const [server, setServer] = useState(true)
     const iframeRef = useRef()
     useEffect(() => {
         if (detais?.movie?.episodes && detais.movie.episodes.length > 0) {
@@ -43,9 +45,6 @@ const DetailPage = () => {
     const HandlerCloseModal = () => {
         setShowModal(false)
     }
-    useEffect(() => {
-        document.title = `${detais?.movie?.movie?.name} | VueMov`
-    }, [detais])
     const scrollToVideo = (episodes) => {
         setcurrent(episodes)
         if (iframeRef.current) {
@@ -67,6 +66,11 @@ const DetailPage = () => {
     }
     return (
         <div className="">
+            <Helmet>
+                <title>{detais?.movie?.movie?.name || 'VueMov'} | VueMov</title>
+                <meta name="description" content={`${detais?.movie?.movie?.name} tại VueMov.`} />
+                <meta name="keywords" content={`${detais?.movie?.movie?.name},${detais?.movie?.movie?.origin_name}, ${detais?.movie?.movie?.content}, VueMov`} />
+            </Helmet>
             <div className="bg-cover w-full aspect-video relative bg-center lg:max-h-[800px]" style={
                 { backgroundImage: `url(${detais?.movie?.movie?.thumb_url})` }
             }>
@@ -96,13 +100,13 @@ const DetailPage = () => {
                             </ul>
                             <ul className="flex gap-4 text-white mt-4">
                                 <li className="flex items-center gap-2"><RiMovie2Fill color="yellow" />{detais?.movie?.movie?.episode_current}</li>
-                                <li>
+                                <ul>
                                     {
                                         detais?.movie?.movie?.country.map((country) => (
                                             <li key={country.id} className="flex gap-2 items-center"><IoEarthSharp color="yellow" />{country.name}</li>
                                         ))
                                     }
-                                </li>
+                                </ul>
                             </ul>
                             <p className="text-white mt-4">
                                 {detais?.movie?.movie?.content.replace("&quot;", "")}
@@ -129,7 +133,7 @@ const DetailPage = () => {
                             {
                                 data?.server_data.map((episodes, idx) => (
                                     <div className={`items-center hover:bg-yellow-400 p-1.5 hover:text-black ${current?.name === episodes.name ? 'bg-yellow-400' : 'bg-black/95'}  text-center rounded-xl`} key={idx}>
-                                        <button onClick={()=>scrollToVideo(episodes)} className="">{episodes.name.replace("Tập ", "")}</button>
+                                        <button onClick={() => scrollToVideo(episodes)} className="">{episodes.name.replace("Tập ", "")}</button>
                                     </div>
                                 ))
                             }

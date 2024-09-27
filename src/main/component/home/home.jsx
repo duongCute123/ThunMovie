@@ -36,8 +36,11 @@ const Home = () => {
         <div>
             <Helmet>
                 <meta charSet="utf-8" />
+                <meta name="google-site-verification" content="H6Wn7nudSuGtV29zgBLCbfQvAJSX4iibYe_1bYPZM48" />
                 <title>VueMov - Xem phim online miễn phí không quảng cáo || VueMov</title>
                 <link rel="canonical" href="https://thun-movie.vercel.app" />
+                <meta name="description" content={`Website cung cấp phim miễn phí nhanh chất lượng cao. Phim online VietSub, Thuyết minh, lồng tiếng chất lượng Full HD. Nguồn phim vietsub chất lượng cao cập nhật nhanh nhất.`} />
+                <meta name="keywords" content={`VueMov`} />
             </Helmet>
             {
                 phim.loading ?

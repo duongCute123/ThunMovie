@@ -6,6 +6,7 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi"
 import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 const Genres = () => {
     const { slug } = useParams()
     const genres = useSelector(state => state.genres)
@@ -22,11 +23,10 @@ const Genres = () => {
         })
     };
     useEffect(() => {
-        window.screenTop = 0
+        window.scrollTo({
+            top: 0
+        })
     }, [])
-    useEffect(() => {
-        document.title = `Phim ${slug} | VueMov`
-    }, [slug, page])
     if (genres.error)
         return <FallBack error={genres.error.message} />
     if (genres.loading) {
@@ -38,7 +38,11 @@ const Genres = () => {
     }
     return (
         <>
-
+            <Helmet>
+                <title>{genres?.genres?.data?.seoOnPage?.titleHead || 'VueMov'} | VueMov</title>
+                <meta name="description" content={`Xem phim ${genres?.genres?.data?.seoOnPage?.descriptionHead} tại VueMov.`} />
+                <meta name="keywords" content={`${genres?.genres?.data?.seoOnPage?.titleHead},${genres?.genres?.data?.seoOnPage?.descriptionHead}, ${slug}, VueMov`} />
+            </Helmet>
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{genres?.genres?.data?.titlePage}</h1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">

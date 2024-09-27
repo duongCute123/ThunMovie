@@ -38,9 +38,9 @@ const Movies = () => {
     return (
         <>
             <Helmet>
-                <meta charSet="utf-8" />
-                <title>phim || VueMov</title>
-                <link rel="canonical" href="https://thun-movie.vercel.app" />
+                <title>{timkiem?.movies?.data?.seoOnPage?.titleHead || 'VueMov'} | VueMov</title>
+                <meta name="description" content={`Xem phim ${timkiem?.movies?.data?.seoOnPage?.descriptionHead} tại VueMov.`} />
+                <meta name="keywords" content={`${timkiem?.movies?.data?.seoOnPage?.titleHead},${timkiem?.movies?.data?.seoOnPage?.descriptionHead}, VueMov`} />
             </Helmet>
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{timkiem?.movies?.data?.titlePage}</h1>
