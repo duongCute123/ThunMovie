@@ -23,8 +23,10 @@ const Movies = () => {
         })
     };
     useEffect(() => {
-        window.screenTop = 0
-    }, [])
+        window.scrollTo({
+            top: 0
+        })
+    }, [timkiem])
 
     if (timkiem.error)
         return <FallBack error={timkiem.error.message} />
@@ -44,7 +46,7 @@ const Movies = () => {
             </Helmet>
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{timkiem?.movies?.data?.titlePage}</h1>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 items-center gap-x-4 gap-y-10 mt-5">
                     {
                         timkiem?.movies?.data?.items && timkiem?.movies?.data?.items.map(
                             (movie, idx) => (

@@ -32,8 +32,8 @@ const SearchMovie = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 items-center gap-4 mt-5">
                 {
                     timkiem?.movie?.data?.items && timkiem?.movie?.data?.items.map(
-                        (movie) => (
-                            <div className="relative">
+                        (movie,idx) => (
+                            <div key={idx} className="relative">
                                 <div className="aspect-[2/3] relative">
                                     <img loading="lazy" src={`${process.env.REACT_APP_API_IMG}/${movie.thumb_url}`} width={320} height={450} className="w-full rounded-lg h-full object-cover bg-no-repeat" alt="" />
                                     <div className={`absolute inset-0 bg-black/60 none flex-col items-center justify-center gap-4 text-sm font-bold opacity-0 hover:opacity-100 duration-300 text-center hidden md:flex`}>

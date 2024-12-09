@@ -18,6 +18,6 @@ export const store = configureStore({
         taps:           EpisodeSlice,
         message:        MessageSlice,
         genres :        GenreSlice,
-        quocgia:    CountriesSlice
+        quocgia:    CountriesSlice,
     }
 })

@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviebo } from '../../../store/moviebo';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 const MoviboSlide = () => {
     const phim = useSelector(state => state.bo)
     const [slug, setSlug] = useState("phim-bo")
@@ -19,7 +20,7 @@ const MoviboSlide = () => {
     useEffect(() => {
         dispatch(moviebo.getAnime({ slug: slug }))
     }, [dispatch])
-
+   
     return (
         <div className='my-5 '>
             {

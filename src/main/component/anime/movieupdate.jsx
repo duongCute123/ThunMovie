@@ -36,13 +36,13 @@ const MovieNewUpDate = () => {
                         slidesPerView: 2, // 2 slides cho màn hình nhỏ
                     },
                     640: {
-                        slidesPerView: 2,
-                    },
-                    768: {
                         slidesPerView: 3,
                     },
+                    768: {
+                        slidesPerView: 5,
+                    },
                     1024: {
-                        slidesPerView: 4,
+                        slidesPerView: 5,
                     },
                 }}
             >
