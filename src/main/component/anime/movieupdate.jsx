@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import 'swiper/css/grid'
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Pagination ,Grid} from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { movie } from '../../../store/movieupdate';
@@ -26,8 +26,14 @@ const MovieNewUpDate = () => {
             <h1 className='text-3xl lg:text-4xl text-white font-bold mt-10 mb-4'>Phim mới cập nhật</h1>
             <Swiper
                 spaceBetween={20}
-                modules={[Pagination]}
+                modules={[Pagination,Grid]}
                 className="mySwiper"
+                grid={
+                    {
+                        rows : 2,
+                        fill : 'row'
+                    }
+                }
                 breakpoints={{
                     320: {
                         slidesPerView: 2, // 1 slide cho màn hình rất nhỏ

@@ -4,7 +4,7 @@ import { genresmovie } from "../../../store/genremovies"
 import { Link } from "react-router-dom"
 
 const GenresSlide = () => {
-    const theloai = "phim-18"
+    const theloai = "kinh-di"
     const dispatch = useDispatch()
     const genres = useSelector(state => state.genres)
     const [page, setPage] = useState(1)

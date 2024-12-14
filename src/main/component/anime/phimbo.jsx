@@ -5,10 +5,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/grid'
 import { CiClock1 } from "react-icons/ci";
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Pagination ,Grid} from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviebo } from '../../../store/moviebo';
 import { Link } from 'react-router-dom';
@@ -45,8 +46,12 @@ const MoviboSlide = () => {
                         <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim bộ</h1>
                         <Swiper
                             spaceBetween={20}
-                            modules={[Pagination]}
+                            modules={[Pagination,Grid]}
                             className="mySwiper"
+                            grid={{
+                                rows : 2,
+                                fill : 'row'
+                            }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 2, // 1 slide cho màn hình rất nhỏ
@@ -78,14 +83,14 @@ const MoviboSlide = () => {
                                             </div>
                                             <span className='absolute top-3 left-1 border border-yellow-400 rounded-md mx-2 bg-yellow-300'>{movie.episode_current}</span>
                                             <Link to={`/detail-movie/${movie.slug}`} className='md:hidden inset-0 absolute'></Link>
-                                            <div className='flex justify-between my-2'>
+                                            <div className='flex justify-between'>
                                                 <Link to={`/detail-movie/${movie.slug}`} className='font-bold line-clamp-1 hover:text-yellow-400 text-white text-lg'>{movie.name}</Link>
                                                 <p className='hidden md:block text-yellow-400'>{movie.year}</p>
                                             </div>
                                             <div className='flex flex-col gap-1 lg:flex-row lg:justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white text-center lg:mx-auto lg:flex lg:justify-center items-center  border  px-0.5'>{movie.quality}</li>
-                                                    <li className='bg-white px-0.5 font-bold line-clamp-1  flex justify-center items-center text-center'>{movie.lang
+                                                    <li className='text-yellow-400 border-y-white text-center text-sm lg:mx-auto lg:flex lg:justify-center items-center  border  px-0.5'>{movie.quality}</li>
+                                                    <li className='bg-white px-0.5 font-bold line-clamp-1  flex justify-center text-sm items-center text-center'>{movie.lang
                                                         .replace("+ Thuyết Minh", "")
                                                         .replace("+ Lồng Tiếng", "")}
                                                     </li>

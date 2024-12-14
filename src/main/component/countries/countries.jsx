@@ -47,7 +47,7 @@ const CountriesMovies = () => {
 
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">Phim {countri?.moviecountries?.data?.titlePage}</h1>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
+                <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 md:grid-cols-4 lg:grid-cols-5 items-center gap-x-4 gap-y-10 mt-5">
                     {
                         countri?.moviecountries?.data?.items && countri?.moviecountries?.data?.items.map(
                             (movie, idx) => (
@@ -68,8 +68,8 @@ const CountriesMovies = () => {
                                     </div>
                                     <div className='flex justify-between'>
                                         <ul className=' flex gap-1'>
-                                            <li className='text-yellow-400 text-center border-y-white border-2 flex justify-center mx-auto items-center w-[80px] h-[25px]'>{movie.quality}</li>
-                                            <li className='bg-white md:w-[100px] md:h-[25px] flex justify-center mx-auto items-center font-bold text-center'>{movie.lang}</li>
+                                            <li className='text-yellow-400 text-center border-y-white border-2 flex justify-center mx-auto px-1 items-center w-auto h-auto'>{movie.quality}</li>
+                                            <li className='bg-white w-auto p-0.5 h-auto flex justify-center mx-auto items-center font-bold text-center'>{movie.lang}</li>
                                         </ul>
                                         <p className='hidden md:block text-white'>{movie.time}</p>
                                     </div>

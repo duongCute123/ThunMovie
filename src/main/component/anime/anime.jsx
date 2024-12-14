@@ -5,9 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/grid'
 import { CiClock1 } from "react-icons/ci";
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Pagination ,Grid} from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { anime } from '../../../store/anime';
 import { Link, replace } from 'react-router-dom';
@@ -49,8 +50,12 @@ const AnimeSlide = () => {
                         <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim hoạt hinh</h1>
                         <Swiper
                             spaceBetween={20}
-                            modules={[Pagination]}
+                            modules={[Pagination,Grid]}
                             className="mySwiper"
+                            grid={{
+                                rows : 2,
+                                fill : "row"
+                            }}
                             breakpoints={{
                                 320: {
                                     slidesPerView: 2, // 1 slide cho màn hình rất nhỏ
@@ -89,8 +94,8 @@ const AnimeSlide = () => {
                                             </div>
                                             <div className='flex flex-col lg:flex-row gap-1 lg:justify-between'>
                                                 <ul className=' flex gap-1'>
-                                                    <li className='text-yellow-400 border-y-white text-center lg:mx-auto lg:flex lg:justify-center items-center  border px-[0.5px] '>{movie.quality}</li>
-                                                    <li className='bg-white font-bold  flex justify-center items-center text-center'>{movie.lang}</li>
+                                                    <li className='text-yellow-400 border-y-white text-sm text-center lg:mx-auto lg:flex lg:justify-center items-center  border px-0.5 '>{movie.quality}</li>
+                                                    <li className='bg-white font-bold text-sm px-0.5 flex justify-center items-center text-center'>{movie.lang}</li>
                                                 </ul>
                                                 <ul className='flex items-center gap-1'>
                                                     <CiClock1 color='yellow' />

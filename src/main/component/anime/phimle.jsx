@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import 'swiper/css/grid'
 import { CiClock1 } from "react-icons/ci";
-import { Pagination } from 'swiper/modules';
+import { Pagination,Grid } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { moviele } from '../../../store/moviele';
 import { Link } from 'react-router-dom';
@@ -42,8 +43,12 @@ const MoviLeSlide = () => {
             <h1 className='text-4xl font-bold text-white mt-10 mb-5'>Phim lẻ</h1>
             <Swiper
                 spaceBetween={20}
-                modules={[Pagination]}
+                modules={[Pagination,Grid]}
                 className="mySwiper"
+                grid={{
+                    rows : 2,
+                    fill : 'row'
+                }}
                 breakpoints={{
                     320: { slidesPerView: 2 },
                     480: { slidesPerView: 3 },
@@ -78,8 +83,8 @@ const MoviLeSlide = () => {
                                 </div>
                                 <div className='flex flex-col gap-1 lg:flex-row lg:justify-between'>
                                     <ul className='flex gap-1'>
-                                        <li className='text-yellow-400 border-y-white text-center xl:px-[0.5] lg:flex lg:mx-auto lg:items-center border'>{movie.quality}</li>
-                                        <li className='bg-white xl:px-[0.5] font-bold md:flex justify-center items-center text-center'>{movie.lang}</li>
+                                        <li className='text-yellow-400 border-y-white text-center h-auto px-0.5 text-sm lg:flex lg:mx-auto lg:items-center border'>{movie.quality}</li>
+                                        <li className={`bg-white ${movie.lang ? 'px-0.5' : 'hidden'} font-bold md:flex justify-center items-center text-sm text-center`}>{movie.lang}</li>
                                     </ul>
                                     <ul className='flex gap-1 items-center'>
                                         <CiClock1 color='yellow' />
