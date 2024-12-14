@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
+// Phim theo quốc gia nhé 
 const CountriesMovies = () => {
     const { slug } = useParams()
     const countri = useSelector(state => state.quocgia)

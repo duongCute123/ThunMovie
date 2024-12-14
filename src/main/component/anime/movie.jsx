@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate"
 import FallBack from "../fallback/fallback";
 import { BeatLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
+// Viết về phim theo thể loại
 const Movies = () => {
     const { fullname } = useParams()
     const timkiem = useSelector(state => state.categorymovie)

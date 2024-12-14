@@ -45,7 +45,7 @@ const Genres = () => {
             </Helmet>
             <div className="flex flex-col mx-5 min-h-screen">
                 <h1 className="text-white mt-24 w-full h-full text-3xl font-bold">{genres?.genres?.data?.titlePage}</h1>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-x-4 gap-y-10 mt-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center gap-x-4 gap-y-10 mt-5">
                     {
                         genres?.genres?.data?.items && genres?.genres?.data?.items.map(
                             (movie, idx) => (

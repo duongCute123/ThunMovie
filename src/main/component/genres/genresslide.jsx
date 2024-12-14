@@ -16,7 +16,7 @@ const GenresSlide = () => {
     }, [])
     return (
         <div className="mx-4">
-            <h1 className="text-4xl font-bold text-white mt-10 mb-5">Phim 18+</h1>
+            <h1 className="text-4xl font-bold text-white mt-10 mb-5">Phim Kinh Dị</h1>
             <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
                 {
                     genres?.genres?.data?.items && genres?.genres?.data?.items.map((countries, idx) => (
