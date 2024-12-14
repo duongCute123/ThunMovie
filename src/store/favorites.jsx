@@ -1,23 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { json } from "react-router-dom";
-import { movie } from "./movieupdate";
-
 const Favourite = createSlice({
     name: "favourite",
     initialState: {
         status: null,
         movie: []
     },
-    extraReducers: {
+    extraReducers: (builder) => {
 
     },
     reducers: {
-        addFavourite(state, action) {
-            state.movie.push(action.payload)
-            localStorage.setItem("yeuthich", JSON.stringify(state.movie))
-        }
+        addFavourite: (state, action) => {
+            if (state.movie.find(movie => movie._id === action.payload._id)) {
+                alert("Phim đã được thêm rồi")
+            } else {
+                state.movie.push(action.payload)
+                localStorage.setItem("yeuthich", JSON.stringify(state.movie))
+                state.status = "add"
+            }
+
+        },
+
     }
 
 })
 export const { addFavourite } = Favourite.actions
-export default Favourite
+export default Favourite.reducer

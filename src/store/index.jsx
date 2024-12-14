@@ -8,6 +8,7 @@ import EpisodeSlice from "./filmepisode"
 import MessageSlice from "./message"
 import GenreSlice from "./genremovies"
 import CountriesSlice from "./countries"
+import FavouriteReducer from "./favorites"
 export const store = configureStore({
     reducer: {
         film:           MovieSlice,
@@ -19,5 +20,6 @@ export const store = configureStore({
         message:        MessageSlice,
         genres :        GenreSlice,
         quocgia:    CountriesSlice,
+        favourite : FavouriteReducer
     }
 })
